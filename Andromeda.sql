@@ -2,24 +2,16 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 27-05-2019 a las 20:19:20
--- Versión del servidor: 10.3.14-MariaDB
--- Versión de PHP: 7.3.2
+-- Servidor: localhost:8889
+-- Tiempo de generación: 31-05-2019 a las 17:35:48
+-- Versión del servidor: 5.7.25
+-- Versión de PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Base de datos: `id9737123_andromeda`
+-- Base de datos: `Andromeda`
 --
 
 -- --------------------------------------------------------
@@ -29,19 +21,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `activos_tecnologicos` (
-  `id_inventario` int(11) NOT NULL,
-  `Asignado` int(11) NOT NULL,
+  `id_inventario` int(3) NOT NULL,
+  `Asignado` int(3) NOT NULL,
   `Nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `Tipo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `Marca` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `Tipo` int(3) NOT NULL,
+  `Marca` int(3) NOT NULL,
   `Modelo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `Serial` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
-  `Fabricante` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `Serial` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `Fabricante` int(3) NOT NULL,
   `Estado` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `invproveedor` int(11) NOT NULL,
+  `invproveedor` int(3) NOT NULL,
   `Fecha_Ingreso` date NOT NULL,
-  `Fecha_Salida` date NOT NULL,
-  `Seguimientos` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `Fecha_Salida` date DEFAULT NULL,
+  `Seguimientos` text COLLATE utf8_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -51,22 +43,9 @@ CREATE TABLE `activos_tecnologicos` (
 --
 
 CREATE TABLE `fabricante` (
-  `idFabricante` int(11) NOT NULL,
+  `idFabricante` int(3) NOT NULL,
   `NombreFabricante` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `fabricante`
---
-
-INSERT INTO `fabricante` (`idFabricante`, `NombreFabricante`) VALUES
-(7, 'APPLE'),
-(2, 'COMPAQ'),
-(4, 'COMPUMAX'),
-(5, 'DELL'),
-(1, 'HP'),
-(3, 'LENOVO'),
-(6, 'Xiaomi');
 
 -- --------------------------------------------------------
 
@@ -75,22 +54,9 @@ INSERT INTO `fabricante` (`idFabricante`, `NombreFabricante`) VALUES
 --
 
 CREATE TABLE `marca` (
-  `idMarca` int(11) NOT NULL,
+  `idMarca` int(3) NOT NULL,
   `NombreMarca` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `marca`
---
-
-INSERT INTO `marca` (`idMarca`, `NombreMarca`) VALUES
-(6, 'Apple'),
-(2, 'COMPAQ'),
-(5, 'COMPUMAX'),
-(4, 'DELL'),
-(1, 'HP'),
-(3, 'LENOVO'),
-(7, 'XIAOMI');
 
 -- --------------------------------------------------------
 
@@ -99,22 +65,12 @@ INSERT INTO `marca` (`idMarca`, `NombreMarca`) VALUES
 --
 
 CREATE TABLE `perfil` (
-  `ID` int(11) NOT NULL,
-  `Login` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `Password` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `ID` int(3) NOT NULL,
+  `Login` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `Password` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Estado` enum('Activo','Inactivo') COLLATE utf8_spanish_ci NOT NULL,
-  `Rol` int(2) NOT NULL
+  `Rol` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `perfil`
---
-
-INSERT INTO `perfil` (`ID`, `Login`, `Password`, `Estado`, `Rol`) VALUES
-(2, 'Admin1', '2e33a9b0b06aa0a01ede70995674ee23', 'Activo', 1),
-(3, 'Admin2', '21eed4f2e9ab214fdbf00a2a091d63c4', 'Activo', 1),
-(4, 'Usuario1', '3f1308149ab8219e32bf9d91028c4eb4', 'Activo', 3),
-(5, 'Usuario2', '471f605e622680810b256b28b40d7cb1', 'Activo', 3);
 
 -- --------------------------------------------------------
 
@@ -123,8 +79,8 @@ INSERT INTO `perfil` (`ID`, `Login`, `Password`, `Estado`, `Rol`) VALUES
 --
 
 CREATE TABLE `proveedor` (
-  `id_Proveedor` int(11) NOT NULL,
-  `NIT` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `id_Proveedor` int(3) NOT NULL,
+  `NIT` int(45) NOT NULL,
   `Nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Direccion` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Telefono` varchar(45) COLLATE utf8_spanish_ci NOT NULL
@@ -137,8 +93,8 @@ CREATE TABLE `proveedor` (
 --
 
 CREATE TABLE `roles` (
-  `id_rol` int(2) NOT NULL,
-  `tipo_rol` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+  `id_rol` int(11) NOT NULL,
+  `tipo_rol` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -146,9 +102,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id_rol`, `tipo_rol`) VALUES
-(1, 'SuperAdmin'),
-(2, 'Administrador'),
-(3, 'Usuario');
+(1, 'Administrador'),
+(2, 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -157,22 +112,9 @@ INSERT INTO `roles` (`id_rol`, `tipo_rol`) VALUES
 --
 
 CREATE TABLE `tipo_hardware` (
-  `idTipo_Hardware` int(11) NOT NULL,
+  `idTipo_Hardware` int(3) NOT NULL,
   `NombreTipo` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `tipo_hardware`
---
-
-INSERT INTO `tipo_hardware` (`idTipo_Hardware`, `NombreTipo`) VALUES
-(1, 'Desktop'),
-(3, 'Impresora'),
-(2, 'Laptop'),
-(7, 'Licencia'),
-(4, 'Mouse'),
-(6, 'Servidor'),
-(5, 'Teclado');
 
 -- --------------------------------------------------------
 
@@ -181,7 +123,7 @@ INSERT INTO `tipo_hardware` (`idTipo_Hardware`, `NombreTipo`) VALUES
 --
 
 CREATE TABLE `usuarios` (
-  `id_usuarios` int(11) NOT NULL,
+  `id_usuarios` int(3) NOT NULL,
   `Nombres` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Cedula` int(11) NOT NULL,
@@ -199,60 +141,63 @@ CREATE TABLE `usuarios` (
 --
 ALTER TABLE `activos_tecnologicos`
   ADD PRIMARY KEY (`id_inventario`),
-  ADD KEY `Asignado_idx` (`Asignado`),
-  ADD KEY `Proveedor_idx` (`invproveedor`),
-  ADD KEY `Marca_idx` (`Marca`),
-  ADD KEY `Fabricante_idx` (`Fabricante`),
-  ADD KEY `Tipo_idx` (`Tipo`);
+  ADD UNIQUE KEY `Nombre` (`Nombre`),
+  ADD KEY `Asignacion` (`Asignado`),
+  ADD KEY `Proveedor` (`invproveedor`),
+  ADD KEY `Marca_Activo` (`Marca`),
+  ADD KEY `Fabricante_Activo` (`Fabricante`),
+  ADD KEY `Tipo_Activo` (`Tipo`);
 
 --
 -- Indices de la tabla `fabricante`
 --
 ALTER TABLE `fabricante`
   ADD PRIMARY KEY (`idFabricante`),
-  ADD UNIQUE KEY `NombreFabricante_UNIQUE` (`NombreFabricante`);
+  ADD UNIQUE KEY `NombreFabricante` (`NombreFabricante`);
 
 --
 -- Indices de la tabla `marca`
 --
 ALTER TABLE `marca`
   ADD PRIMARY KEY (`idMarca`),
-  ADD UNIQUE KEY `NombreModelo_UNIQUE` (`NombreMarca`);
+  ADD UNIQUE KEY `NombreMarca` (`NombreMarca`);
 
 --
 -- Indices de la tabla `perfil`
 --
 ALTER TABLE `perfil`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `Rol_perfil` (`Rol`);
+  ADD UNIQUE KEY `Login` (`Login`),
+  ADD KEY `Rol_Perfil` (`Rol`);
 
 --
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_Proveedor`),
-  ADD UNIQUE KEY `NIT_UNIQUE` (`NIT`);
+  ADD UNIQUE KEY `NIT` (`NIT`),
+  ADD UNIQUE KEY `Nombre` (`Nombre`);
 
 --
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id_rol`);
+  ADD PRIMARY KEY (`id_rol`),
+  ADD UNIQUE KEY `tipo_rol` (`tipo_rol`);
 
 --
 -- Indices de la tabla `tipo_hardware`
 --
 ALTER TABLE `tipo_hardware`
   ADD PRIMARY KEY (`idTipo_Hardware`),
-  ADD KEY `NombreTipo_idx` (`NombreTipo`);
+  ADD UNIQUE KEY `NombreTipo` (`NombreTipo`);
 
 --
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuarios`),
-  ADD UNIQUE KEY `Cedula_UNIQUE` (`Cedula`),
-  ADD UNIQUE KEY `Correo_UNIQUE` (`Correo`);
+  ADD UNIQUE KEY `Cedula` (`Cedula`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -262,49 +207,49 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `activos_tecnologicos`
 --
 ALTER TABLE `activos_tecnologicos`
-  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_inventario` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `fabricante`
 --
 ALTER TABLE `fabricante`
-  MODIFY `idFabricante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idFabricante` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idMarca` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_Proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Proveedor` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_hardware`
 --
 ALTER TABLE `tipo_hardware`
-  MODIFY `idTipo_Hardware` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idTipo_Hardware` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuarios` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -315,15 +260,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `activos_tecnologicos`
   ADD CONSTRAINT `Asignacion` FOREIGN KEY (`Asignado`) REFERENCES `usuarios` (`id_usuarios`),
-  ADD CONSTRAINT `Proveedor` FOREIGN KEY (`invproveedor`) REFERENCES `proveedor` (`id_Proveedor`);
+  ADD CONSTRAINT `Fabricante_Activo` FOREIGN KEY (`Fabricante`) REFERENCES `fabricante` (`idFabricante`),
+  ADD CONSTRAINT `Marca_Activo` FOREIGN KEY (`Marca`) REFERENCES `marca` (`idMarca`),
+  ADD CONSTRAINT `Proveedor` FOREIGN KEY (`invproveedor`) REFERENCES `proveedor` (`id_Proveedor`),
+  ADD CONSTRAINT `Tipo_Activo` FOREIGN KEY (`Tipo`) REFERENCES `tipo_hardware` (`idTipo_Hardware`);
 
 --
 -- Filtros para la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  ADD CONSTRAINT `Rol_perfil` FOREIGN KEY (`Rol`) REFERENCES `roles` (`id_rol`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ADD CONSTRAINT `Rol_Perfil` FOREIGN KEY (`Rol`) REFERENCES `roles` (`id_rol`);
