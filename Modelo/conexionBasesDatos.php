@@ -3,7 +3,7 @@
 
 function Conectarse()
 {
-	$objConexion = new mysqli("localhost","id9737123_root","Mentirosa1069","id9737123_andromeda");
+	$objConexion = new mysqli("localhost","admin","1234567890","andromedadb");
 	if ($objConexion->connect_errno)
 	{
 		echo "Erro de conexion a la Base de Datos ".$objConexion->connect_error;

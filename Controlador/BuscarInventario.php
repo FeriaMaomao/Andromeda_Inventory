@@ -4,7 +4,7 @@ extract ($_REQUEST);
 if (!isset($_SESSION['user']))
   header("location:../index.php?x=2");//x=2 significa que no han iniciado sesión
 
-$mysqli = new mysqli("localhost","root","","andromeda_inventory");
+$mysqli = new mysqli("localhost","admin","1234567890","andromedadb");
 	
     $salida = "";
 

@@ -9,12 +9,12 @@ if (!isset($_REQUEST['x']))
 <html>
 <head>
 	<title>Inicio de Sesion</title>
-	<link rel="stylesheet" type="text/css" href="../CSS/Index.css">
-	<link rel="stylesheet" type="text/css" href="../fonts/style.css">
+	<link rel="stylesheet" type="text/css" href="CSS/Index.css">
+	<link rel="stylesheet" type="text/css" href="fonts/style.css">
 	<meta charset="utf-8">
 </head>
 <body>
-<form action="../Controlador/validarIniciarSesion.php" class="login" autocomplete="off">
+<form action="Controlador/validarIniciarSesion.php" class="login" autocomplete="off">
     <h1 class="login-title"><span class="icon-users"></span> Inicio de Sesion</h1>
     <input type="text" class="login-input" placeholder="Usuario" autofocus id="login" name="login" required>
     <input type="password" class="icon-user login-input" placeholder="Contraseña" id="pass" name="pass" required>
