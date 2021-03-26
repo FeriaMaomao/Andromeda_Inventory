@@ -26,12 +26,12 @@ if(!isset($_REQUEST['msj'])){
 
     function ModificarPerfil(codperfil)
     {
-      window.location="localhost/andromeda_inventory/Vista/ModificarPerfil.php?parametro="+codperfil;
+      window.location="../Vista/ModificarPerfil.php?parametro="+codperfil;
     }
 
     function EliminarPerfil(codigoeliminar)
     {
-      window.location="localhost/andromeda_inventory/Controlador/validarEliminarPerfil.php?parametro="+codigoeliminar;
+      window.location="../Controlador/validarEliminarPerfil.php?parametro="+codigoeliminar;
     }
 
   </script>
