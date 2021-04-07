@@ -84,7 +84,7 @@ $roles = $objConexion->query($sql);
      <select style="width:30%" class="form-control" id="Rol" name="Rol" required>
          <option>Seleccione</option>
          <?php while ($rol=$roles->fetch_object()) { ?>
-          <option value=" <?php echo $rol->Id; ?> " >
+          <option value=" <?php echo $rol->id_rol; ?> " >
             <?php echo $rol->id_rol. " " .$rol->tipo_rol ?>
           </option>
             <?php } ?>
@@ -94,11 +94,8 @@ $roles = $objConexion->query($sql);
     <label class="control-label col-sm-4" for="Estado">Estado: </label>
      <select style="width:30%" class="form-control" id="Estado" name="Estado" required>
          <option>Seleccione</option>
-         <?php while ($fila=$perfil->fetch_object()) { ?>
-          <option value=" <?php echo $fila->Estado; ?> " >
-            <?php echo $fila->Estado ?>
-          </option>
-            <?php } ?>
+         <option>Activo</option>
+         <option>Inactivo</option>
         </select>
   </div>
 
