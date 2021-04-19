@@ -59,63 +59,63 @@ require "../Controlador/ConsultaReportes.php";
       <br>
         <br>
         <br>
-  <form class="form-inline" action="../Controlador/Generar Reporte.php" method="post" >
-     <div class="form-group col-md-2">
-      <label for="asignado">Usuario: </label>
-        <select id="asignado" name="asignado" class="form-control">
-          <option value="">Seleccione</option>
-            <?php while ($usuario=$usuarios->fetch_object()) { ?>
-          <option value="<?php echo $usuario->id_usuarios;?>">
-            <?php echo $usuario->id_usuarios. " " .$usuario->Nombres. " " .$usuario->Apellidos ?>
-          </option>
-            <?php } ?>
-        </select>
-    </div>
-
-    <div class="form-group col-md-2">
-       <label for="exampleFormControlSelect1">Estado: </label>
-       <select class="form-control" id="estado" name="estado">
-         <option value="">Seleccione</option>
-         <?php while ($estac=$estadoactivo->fetch_object()) { ?>
-          <option value="<?php echo $estac->Estado; ?>">
-            <?php echo $estac->Estado?>
-          </option>
-            <?php } ?>
-        </select>
-    </div>
-
-    <div class="form-group col-md-2">
-       <label for="exampleFormControlSelect1">Ingreso o Salida: </label>
-       <select class="form-control form-control-lg" id="ingresosalida" name="ingresosalida">
-         <option value="">Seleccione</option>
-         <option value="Fecha_Ingreso">Fecha_Ingreso</option>
-         <option value="Fecha_Salida">Fecha_Salida</option>
-        </select>
-    </div>
-
-    <div class="form-group col-md-2">
-      <label for="Fecha Ingreso">Desde:</label>
-      <input type="date" class="form-control" id="desde" name="desde">
-    </div>
-
-    <div class="form-group col-md-2">
-      <label for="Fecha Salida">Hasta:</label>
-      <input type="date" class="form-control" id="hasta" name="hasta">
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-     <br>
-     <br>
-      <div align="middle">
-       <button type="submit" class="btn btn-primary btn-lg" name="generar_reporte" >Descargar</button>
-        <button type="reset" class="btn btn-primary btn-lg">Cancelar</button>
-      </div>
-  </form>
+      <form class="form-inline" action="../Controlador/Generar Reporte.php" method="post" >
+         <div class="form-group col-md-2">
+          <label for="asignado">Usuario: </label>
+            <select id="asignado" name="asignado" class="form-control">
+              <option value="">Seleccione</option>
+                <?php while ($usuario=$usuarios->fetch_object()) { ?>
+              <option value="<?php echo $usuario->id_usuarios;?>">
+                <?php echo $usuario->id_usuarios. " " .$usuario->Nombres. " " .$usuario->Apellidos ?>
+              </option>
+                <?php } ?>
+            </select>
+        </div>
+                
+        <div class="form-group col-md-2">
+           <label for="exampleFormControlSelect1">Estado: </label>
+           <select class="form-control" id="estado" name="estado">
+             <option value="">Seleccione</option>
+             <?php while ($estac=$estadoactivo->fetch_object()) { ?>
+              <option value="<?php echo $estac->Estado; ?>">
+                <?php echo $estac->Estado?>
+              </option>
+                <?php } ?>
+            </select>
+        </div>
+            
+        <div class="form-group col-md-2">
+           <label for="exampleFormControlSelect1">Ingreso o Salida: </label>
+           <select class="form-control form-control-lg" id="ingresosalida" name="ingresosalida">
+             <option value="">Seleccione</option>
+             <option value="Fecha_Ingreso">Fecha_Ingreso</option>
+             <option value="Fecha_Salida">Fecha_Salida</option>
+            </select>
+        </div>
+            
+        <div class="form-group col-md-2">
+          <label for="Fecha Ingreso">Desde:</label>
+          <input type="date" class="form-control" id="desde" name="desde">
+        </div>
+            
+        <div class="form-group col-md-2">
+          <label for="Fecha Salida">Hasta:</label>
+          <input type="date" class="form-control" id="hasta" name="hasta">
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+         <br>
+         <br>
+          <div align="middle">
+           <button type="submit" class="btn btn-primary btn-lg" name="generar_reporte" >Descargar</button>
+            <button type="reset" class="btn btn-primary btn-lg">Cancelar</button>
+          </div>
+      </form>
       <br>
       <br>
-</div>
+    </div>
 
     </div>
     </div>
